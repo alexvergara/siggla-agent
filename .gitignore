@@ -1,0 +1,18 @@
+node_modules/
+dist/
+*.log
+
+# Secrets — never commit
+.env
+.env.local
+
+# Baileys auth session (the linked-device creds)
+auth_state/
+*.sqlite
+*.sqlite-journal
+data/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
