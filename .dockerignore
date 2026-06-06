@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.local
+auth_state
+data
+*.sqlite
+*.sqlite-journal
+*.log
+docs
+test
+README.md

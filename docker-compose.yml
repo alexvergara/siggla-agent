@@ -1,0 +1,16 @@
+services:
+  siggla-agent:
+    build: .
+    image: siggla-agent:latest
+    container_name: siggla-agent
+    restart: unless-stopped
+    env_file: .env
+    # No ports: the bot has no HTTP surface. On first run the WhatsApp QR is
+    # printed to the logs — view it with: docker compose logs -f
+    tty: true
+    volumes:
+      # Persisted across rebuilds:
+      - ./auth_state:/app/auth_state        # Baileys linked-device credentials
+      - ./data:/app/data                    # SQLite session store
+      # Edit the KB and restart (no rebuild needed):
+      - ./src/kb/knowledge-base.md:/app/src/kb/knowledge-base.md:ro

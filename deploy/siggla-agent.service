@@ -1,0 +1,24 @@
+[Unit]
+Description=Siggi - Sigg.la incoming WhatsApp bot
+Documentation=https://github.com/alexvergara/siggla-agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Adjust to wherever you cloned/built the repo on the box.
+WorkingDirectory=/opt/siggla-agent
+EnvironmentFile=/opt/siggla-agent/.env
+# Use an absolute node path (check with `which node`); nvm installs live elsewhere.
+ExecStart=/usr/bin/node /opt/siggla-agent/dist/index.js
+Restart=always
+RestartSec=5
+# Run as a non-root service account that owns the repo dir, auth_state/ and data/.
+User=siggla
+Group=siggla
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=siggla-agent
+
+[Install]
+WantedBy=multi-user.target
